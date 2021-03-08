@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState} from 'react';
 import {Select,MenuItem} from '@material-ui/core';
 // import Button from '@material-ui/core/Button';
 // import TextField from '@material-ui/core/TextField';
@@ -9,13 +9,21 @@ const [newitem,setNewItem]=useState([])
 const [total,setTotal]=useState()
 
  const itemEvent=(event)=>{
+  
     setNum(event.target.value)
+  
+    
      console.log(event.target.value) //5
  }
 
 
 const listOfNum=(event)=>{
-if(newitem.length < 2)
+  // if(num==="")
+  // {
+  //   alert("ADD something")
+  // }
+
+if(newitem.length < 2 && num > 0)
 {
    
 
@@ -57,6 +65,11 @@ const getDivide=()=>{
   setTotal ((+newitem[0]) / (+newitem[1]))
 }
 
+const destroyEvent=(event)=>{
+  setNewItem([]) 
+  setTotal("")
+}
+
 return (
   <>
   <div className="header">
@@ -64,7 +77,7 @@ return (
    <input
             className="inputField1"
           id="outlined-basic" label="Enter a number" variant="outlined" 
-           type="text"
+           type="number"
          
           placeholder="Enter a number" 
           onChange={itemEvent}
@@ -73,11 +86,12 @@ return (
          // onChange={e=> setNum(+e.target.value)}
   
    />
-
    <button className="btnAdd" 
            onClick={listOfNum} >
              ADD NUMBER
    </button>
+
+   <button className="btnAdd" onClick={destroyEvent}>RESET BUTTON</button>
 
    <ol>
       { newitem.map((val)=>{
@@ -85,9 +99,7 @@ return (
            
         })
       }
-      
-    
-   </ol>
+    </ol>
     
    <Select className="menu">
           <MenuItem onClick={getSum}>+</MenuItem>
@@ -101,5 +113,4 @@ return (
   </>
 );
 }
-
 export default App;
